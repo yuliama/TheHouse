@@ -1,3 +1,21 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant&display=swap');
+*{
+  box-sizing:border-box;
+}
+body, html{
+  padding:0;
+  margin:0;
+  direction: rtl;
+  text-align: right;
+  font-family: 'Arimo', sans-serif;
+}
+.container{
+  color:white;
+  max-width: 1400px;
+  margin: auto;
+}
+.App{
+  background-size: cover;
+  min-height: 750px;
 }

@@ -1,0 +1,19 @@
+.p-homePage{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.p-homePage > .content{
+    margin-top:50px;
+    max-width: 350px;
+    font-size: 20px;
+}
+.p-homePage > .content > form{
+    display: flex;
+    margin:50px 0;
+}
+.p-homePage .email{
+    width: 300px;
+    margin-left:20px;
+}

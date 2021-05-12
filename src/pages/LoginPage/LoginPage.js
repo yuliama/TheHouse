@@ -1,16 +1,33 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
-import Header from '../../components/Header/Header'
+import UserModel from '../../model/UserModel';
 
-export default function LoginPage() {
+export default function LoginPage({activeUser, onLogin}) {
     const [email, setEmail] = useState();
     const [pwd,setPwd] = useState();
+    const [showInvalidLogin, setShowInvalidLogin] = useState(false);
+
+    async function login(e){
+        e.preventDefault();
+        try{
+            const activeUser = await UserModel.login(email, pwd);
+            onLogin(activeUser);
+            console.log(activeUser);
+        }
+        catch(error){
+            console.error('Error while logging in user', error);
+            setShowInvalidLogin(true);
+        }
+    }
 
     return (
         <div className="p-login">
-            <Header></Header>
+            
             <h1>Please Login</h1>
-            <Form>
+            {/* <p>or <Link to="/signup">create an account</Link></p> */}
+            {showInvalidLogin ? <Alert variant="danger">Invalid Credentials!</Alert> : null}
+            <Form onSubmit={login}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email"

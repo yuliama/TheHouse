@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    padding:50px;
+    justify-content: space-between;
+
+}
+.header button, .header a{
+    color:white;
+    text-decoration: none;
+    font-family: 'Assistant', sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+
+}
+.header button:hover{
+    color:#ff5933;
+}
+.header > .mainMenu{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.header > .mainMenu .logo{
+    width:60px;
+    cursor: pointer;
+}
