@@ -1,27 +1,22 @@
-.header{
+.actions-header{
     display: flex;
-    padding:50px;
-    padding-bottom: 0;
+    padding:0 50px;
     justify-content: space-between;
 
 }
-.header button, .header a{
+.actions-header button, .actions-header a, .greetings-menu{
     color:white;
     text-decoration: none;
     font-family: 'Assistant', sans-serif;
-    font-size: 21px;
+    font-size: 17px;
     font-weight: bold;
 
 }
-.header button:hover, .header a:hover{
+.actions-header button:hover, .actions-header a:hover{
     color:#ff5933;
 }
-.header > .mainMenu{
+.actions-header > .mainMenu{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-}
-.header > .mainMenu .logo{
-    width:60px;
-    cursor: pointer;
 }

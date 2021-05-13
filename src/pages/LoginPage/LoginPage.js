@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { Form, Button, Alert } from 'react-bootstrap';
 import UserModel from '../../model/UserModel';
 
@@ -8,12 +8,17 @@ export default function LoginPage({activeUser, onLogin}) {
     const [pwd,setPwd] = useState();
     const [showInvalidLogin, setShowInvalidLogin] = useState(false);
 
+    if (activeUser) {
+        return <Redirect to="/dashBoard"/>
+    }
+
     async function login(e){
         e.preventDefault();
         try{
             const activeUser = await UserModel.login(email, pwd);
             onLogin(activeUser);
-            console.log(activeUser);
+            //console.log(activeUser);
+            return <Redirect to="/actions"/>
         }
         catch(error){
             console.error('Error while logging in user', error);

@@ -7,7 +7,9 @@ import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import DashBoardPage from './pages/DashBoardPage/DashBoardPage';
+import ActionsHeader from './components/ActionsHeader/ActionsHeader';
+import ManageUsers from './pages/ManageUsers/ManageUsers';
 function App() {
   const [activeUser, setActiveUser] = useState(UserModel.loadActiveUser());
 
@@ -17,17 +19,22 @@ function App() {
   }
   return (
     <div className="App" style={{ background: "url(" + process.env.PUBLIC_URL + "/images/site-bg.jpg) fixed no-repeat 0 40%" }}>
-      <Header></Header>
-      <div className="container">
-        <HashRouter>
-          <Switch>
+
+
+
+      <HashRouter>
+        <Header activeUser={activeUser} onLogout={() => handleLogout()}></Header>
+        <ActionsHeader activeUser={activeUser}></ActionsHeader>
+        <Switch>
+          <div className="container">
             <Route exact path="/"><HomePage /></Route>
             <Route exact path="/login"><LoginPage activeUser={activeUser} onLogin={user => setActiveUser(user)} /></Route>
-            {/* <Route exact path="/signup"><SignupPage activeUser={activeUser} onLogin={user => setActiveUser(user)} /></Route> */}
+            <Route exact path="/dashBoard"><DashBoardPage activeUser={activeUser}></DashBoardPage></Route>
+            <Route exact path="/manageUsers"><ManageUsers activeUser={activeUser}></ManageUsers></Route>
+          </div>
+        </Switch>
+      </HashRouter>
 
-          </Switch>
-        </HashRouter>
-      </div>
       <Footer></Footer>
     </div>
   );

@@ -13,9 +13,10 @@ body, html{
 .container{
   color:white;
   max-width: 1400px;
-  margin: auto;
+  margin:auto;
+  padding:50px;
 }
 .App{
   background-size: cover;
-  min-height: 750px;
+  /* min-height: 750px; */
 }

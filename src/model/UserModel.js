@@ -8,6 +8,7 @@ export default class UserModel {
         this.fullName = parseUser.get("fullName");
         this.apartment = parseUser.get("apartment");
         this.isCommiteeMember = parseUser.get("isCommiteeMember");
+        this.Community = parseUser.get("CommunityId");
         this.#parseUser = parseUser;
     }
 
@@ -20,7 +21,7 @@ export default class UserModel {
     }
     static logout() {
         UserModel.activeUser = null;
-        Parse.User.logout();
+        Parse.User.logOut();
     }
 
     static loadActiveUser() {
@@ -28,7 +29,7 @@ export default class UserModel {
         return UserModel.activeUser;
     }
 
-    static async resetPassword(email){
+    static async resetPassword(email) {
         return await Parse.User.requestPasswordReset(email);
     }
     static async addNewUser(email, fullName, apartment, pwd) {
@@ -39,7 +40,16 @@ export default class UserModel {
         user.set('apartment', apartment);
         user.set('password', pwd);
         user.set('isCommiteeMember', false);
+        user.set('CommunityId', this.activeUser.CommunityId);
 
         return await user.signUp();
+    }
+
+    async GetComminityUsers(communityId) {
+        const query = new Parse.Query(Parse.User);
+        query.contains("CommunityId", communityId);
+        const parseUsers = await query.find();
+        const users = parseUsers.map(parseUser => new UserModel(parseUser));
+        return users;
     }
 }

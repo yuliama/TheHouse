@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './HomePage.css';
 
 export default function HomePage() {
@@ -21,7 +21,7 @@ export default function HomePage() {
                 </Form>
             </div>
             <div className="baner">
-                <img src={process.env.PUBLIC_URL + "/images/app-baner.png"}></img>
+                <img alt="banner" src={process.env.PUBLIC_URL + "/images/app-baner.png"}></img>
             </div>
         </div>
     )
