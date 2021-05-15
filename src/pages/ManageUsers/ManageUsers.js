@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CommunityModel from '../../model/CommunityModel';
+import './ManageUsers.css';
 
 export default function ManageUsers({ activeUser }) {
 
@@ -17,7 +18,12 @@ export default function ManageUsers({ activeUser }) {
         if (activeUser) {
             fetchData();
         }
-    }, [activeUser])
+    }, [activeUser, communityDetails]);
+
+    async function deleteUser(user) {
+        let res = await activeUser.deleteUser(user.id);
+        // //console.log(res);
+    }
 
     if (!activeUser) {
         return <Redirect to="/" />
@@ -37,22 +43,22 @@ export default function ManageUsers({ activeUser }) {
                 <Col md={6}></Col>
             </Row>
             {communityUsers.map((user, index) =>
-                <Row key={user.id} className="bg-light text-dark border">
+                <Row key={user.id} className="bg-light text-dark border userRow">
                     <Col md={1}>{index + 1}</Col>
                     <Col md={2}>{user.fullName}</Col>
                     <Col md={2}>{user.email}</Col>
                     <Col md={1}>{user.apartment}</Col>
                     <Col md={6}>
                         <Button>עריכה</Button>
-                        <Button>מחיקה</Button>
+                        {user.id != activeUser.id ? <Button onClick={() => deleteUser(user)}>מחיקה</Button> : ''}
                     </Col>
                 </Row>
             )}
             <Row className="bg-light text-dark border">
-                    <Col md={1}></Col>
-                    <Col md={2}></Col>
-                    <Col md={2}><a href="">+הוסף דייר</a></Col>
-                </Row>
+                <Col md={1}></Col>
+                <Col md={2}></Col>
+                <Col md={2}><a href="">+הוסף דייר</a></Col>
+            </Row>
 
         </Container>
     )

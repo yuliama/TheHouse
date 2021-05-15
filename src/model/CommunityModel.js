@@ -12,7 +12,6 @@ export default class CommunityModel {
         query.contains("objectId", communityId);
         const parseCom = await query.find();
         const community = parseCom.map(item => new CommunityModel(item));
-        console.log(community);
         return community;
     }
 }
