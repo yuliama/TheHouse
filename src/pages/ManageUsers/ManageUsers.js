@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CommunityModel from '../../model/CommunityModel';
+import AddNewUserModal from '../../components/AddNewUserModal/AddNewUserModal';
 import './ManageUsers.css';
 
 export default function ManageUsers({ activeUser }) {
-
     const [communityUsers, setCommunityUsers] = useState([]);
     const [communityDetails, setCommunityDetails] = useState([]);
+    const [showNewUserModal, setShowNewUserModal] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -21,8 +22,7 @@ export default function ManageUsers({ activeUser }) {
     }, [activeUser, communityDetails]);
 
     async function deleteUser(user) {
-        let res = await activeUser.deleteUser(user.id);
-        // //console.log(res);
+        await activeUser.deleteUser(user.id);
     }
 
     if (!activeUser) {
@@ -46,7 +46,7 @@ export default function ManageUsers({ activeUser }) {
                 <Row key={user.id} className="bg-light text-dark border userRow">
                     <Col md={1}>{index + 1}</Col>
                     <Col md={2}>{user.fullName}</Col>
-                    <Col md={2}>{user.email}</Col>
+                    <Col md={2}>{user.username}</Col>
                     <Col md={1}>{user.apartment}</Col>
                     <Col md={6}>
                         <Button>עריכה</Button>
@@ -57,10 +57,9 @@ export default function ManageUsers({ activeUser }) {
             <Row className="bg-light text-dark border">
                 <Col md={1}></Col>
                 <Col md={2}></Col>
-                <Col md={2}><a href="">+הוסף דייר</a></Col>
+                <Col md={2}><Button onClick={() => setShowNewUserModal(true)}>+הוסף דייר</Button></Col>
             </Row>
-
+            <AddNewUserModal show={showNewUserModal} onClose={() => setShowNewUserModal(false)}></AddNewUserModal>
         </Container>
     )
-
 }

@@ -5,6 +5,7 @@ export default class UserModel {
     constructor(parseUser) {
         this.id = parseUser.id;
         this.email = parseUser.get("email");
+        this.username = parseUser.get("username");
         this.fullName = parseUser.get("fullName");
         this.apartment = parseUser.get("apartment");
         this.isCommiteeMember = parseUser.get("isCommiteeMember");
@@ -33,18 +34,19 @@ export default class UserModel {
     static async resetPassword(email) {
         return await Parse.User.requestPasswordReset(email);
     }
-    static async addNewUser(email, fullName, apartment, pwd) {
-        const user = new Parse.User()
-        user.set('username', email);
-        user.set('email', email);
-        user.set('fullName', fullName);
-        user.set('apartment', apartment);
-        user.set('password', pwd);
-        user.set('isCommiteeMember', false);
-        user.set('CommunityId', this.activeUser.CommunityId);
-        user.set('IsDeleted', false);
+    static async addNewUser(email, fullName, apartment) {
+        const UserTable = Parse.Object.extend('User');
+        const newUser = new UserTable();
+        newUser.set('username', email);
+        newUser.set('email', email);
+        newUser.set('fullName', fullName);
+        newUser.set('apartment', apartment);
+        newUser.set('password', '1234567');
+        newUser.set('isCommiteeMember', false);
+        newUser.set('CommunityId', this.activeUser.Community);
+        newUser.set('IsDeleted', false);
 
-        return await user.signUp();
+        return await newUser.save();
     }
     async deleteUser(userId) {
         const query = new Parse.Query(Parse.User);
