@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DashBoardPage from './pages/DashBoardPage/DashBoardPage';
 import ActionsHeader from './components/ActionsHeader/ActionsHeader';
 import ManageUsers from './pages/ManageUsers/ManageUsers';
+import ManageVotes from './pages/ManageVotes/ManageVotes';
 function App() {
   const [activeUser, setActiveUser] = useState(UserModel.loadActiveUser());
 
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/login"><LoginPage activeUser={activeUser} onLogin={user => setActiveUser(user)} /></Route>
             <Route exact path="/dashBoard"><DashBoardPage activeUser={activeUser}></DashBoardPage></Route>
             <Route exact path="/manageUsers"><ManageUsers activeUser={activeUser}></ManageUsers></Route>
+            <Route exact path="/manageVotes"><ManageVotes activeUser={activeUser}></ManageVotes></Route>
           </div>
         </Switch>
       </HashRouter>

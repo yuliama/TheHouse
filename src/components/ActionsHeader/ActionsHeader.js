@@ -15,7 +15,7 @@ export default function ActionsHeader({ activeUser }) {
                         <a href="#/manageUsers">ניהול דיירים</a>
                         <Button variant='link'>ניהול ליקויים</Button>
                         <Button variant='link'>ניהול הודעות</Button>
-                        <Button variant='link'>ניהול הצבעות</Button>
+                        <a href="#/ManageVotes">ניהול הצבעות</a>
                     </div>
                     : ''}
                 <Button variant='link'>דיווח על ליקוי</Button>
