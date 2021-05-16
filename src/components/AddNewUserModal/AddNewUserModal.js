@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form, Col, Row, Image } from 'react-bootstrap';
 import UserModel from '../../model/UserModel';
 
-export default function AddNewUserModal({ show, onClose }) {
+export default function AddNewUserModal({ user, show, onClose }) {
     const [fullName, setFullName] = useState();
     const [email, setEmail] = useState();
     const [apartment, setApartment] = useState();
+
+    useEffect(() => {
+        clearForm();
+        if (user) {
+            setFullName(user.fullName);
+            setEmail(user.username);
+            setApartment(user.apartment);
+        }
+
+    }, [user]);
 
     function clearForm() {
         setFullName("");
@@ -13,9 +23,9 @@ export default function AddNewUserModal({ show, onClose }) {
         setApartment("");
     }
 
-    async function createUser() {
-        //const user = new UserModel(fullName, email, apartment);
-        await UserModel.addNewUser(email, fullName, apartment);
+    async function createOrUpdateUser() {
+        user ? await UserModel.updateUser(user.id, email, fullName, apartment)
+            : await UserModel.addNewUser(email, fullName, apartment);
         clearForm();
         onClose();
     }
@@ -23,7 +33,7 @@ export default function AddNewUserModal({ show, onClose }) {
     return (
         <Modal show={show} onHide={onClose} size="lg" className="c-new-user">
             <Modal.Header closeButton>
-                <Modal.Title>הוספת משתמש חדש</Modal.Title>
+                {user ? <Modal.Title>עדכון משתמש</Modal.Title> : <Modal.Title>הוספת משתמש חדש</Modal.Title>}
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -61,7 +71,7 @@ export default function AddNewUserModal({ show, onClose }) {
                 <Button variant="secondary" onClick={onClose}>
                     ביטול
                 </Button>
-                <Button variant="primary" onClick={() => createUser()}>
+                <Button variant="primary" onClick={() => createOrUpdateUser()}>
                     שמירה
                 </Button>
             </Modal.Footer>

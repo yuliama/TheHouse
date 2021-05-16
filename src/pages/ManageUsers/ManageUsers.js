@@ -9,6 +9,7 @@ export default function ManageUsers({ activeUser }) {
     const [communityUsers, setCommunityUsers] = useState([]);
     const [communityDetails, setCommunityDetails] = useState([]);
     const [showNewUserModal, setShowNewUserModal] = useState(false);
+    const [userToUpdate, setUserToUpdate] = useState();
 
     useEffect(() => {
         async function fetchData() {
@@ -23,6 +24,14 @@ export default function ManageUsers({ activeUser }) {
 
     async function deleteUser(user) {
         await activeUser.deleteUser(user.id);
+    }
+    async function updateUser(user) {
+        setShowNewUserModal(true);
+        setUserToUpdate(user);
+    }
+    async function addUser(){
+        setShowNewUserModal(true);
+        setUserToUpdate(null);
     }
 
     if (!activeUser) {
@@ -49,7 +58,7 @@ export default function ManageUsers({ activeUser }) {
                     <Col md={2}>{user.username}</Col>
                     <Col md={1}>{user.apartment}</Col>
                     <Col md={6}>
-                        <Button>עריכה</Button>
+                        <Button onClick={() => updateUser(user)}>עריכה</Button>
                         {user.id != activeUser.id ? <Button onClick={() => deleteUser(user)}>מחיקה</Button> : ''}
                     </Col>
                 </Row>
@@ -57,9 +66,9 @@ export default function ManageUsers({ activeUser }) {
             <Row className="bg-light text-dark border">
                 <Col md={1}></Col>
                 <Col md={2}></Col>
-                <Col md={2}><Button onClick={() => setShowNewUserModal(true)}>+הוסף דייר</Button></Col>
+                <Col md={2}><Button onClick={() => addUser()}>+הוסף דייר</Button></Col>
             </Row>
-            <AddNewUserModal show={showNewUserModal} onClose={() => setShowNewUserModal(false)}></AddNewUserModal>
+            <AddNewUserModal user={userToUpdate} show={showNewUserModal} onClose={() => setShowNewUserModal(false)}></AddNewUserModal>
         </Container>
     )
 }
