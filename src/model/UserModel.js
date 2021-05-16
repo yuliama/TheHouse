@@ -46,7 +46,13 @@ export default class UserModel {
         newUser.set('CommunityId', this.activeUser.Community);
         newUser.set('IsDeleted', false);
 
-        return await newUser.save();
+        var acl = new Parse.ACL();
+        acl.setPublicWriteAccess(true);
+        acl.setPublicReadAccess(true);
+
+        newUser.setACL(acl);
+
+        await newUser.save({ useMasterKey: true });
     }
     async deleteUser(userId) {
         const query = new Parse.Query(Parse.User);
