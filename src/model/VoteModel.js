@@ -7,5 +7,7 @@ export default class VoteModel {
         this.details = parseVote.details;
         this.dueDate = parseVote.dueDate;
         this.isPermitMultiVotes = parseVote.isPermitMultiVotes;
+        this.voteOptions = parseVote.voteOptions;
+        this.userVotes = parseVote.userVotes;
     }
 }

@@ -1,0 +1,15 @@
+.c-voteOptionSection .optionsList .optionTxt{
+    margin-right:20px;
+    margin-top: 5px;
+    background-color: #ff5933;
+    padding: 3px 8px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.c-voteOptionSection .optionsList .optionTxt button{
+    position: relative;
+    top: -8px;
+    left: 5px;
+    color: white;
+}

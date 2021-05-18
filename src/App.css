@@ -20,3 +20,9 @@ body, html{
   background-size: cover;
   /* min-height: 750px; */
 }
+.container button{
+  background-color: #ff5933 !important;
+}
+.container button:hover{
+  opacity:0.8;
+}

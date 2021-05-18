@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Button, Modal, Form, Col, Row, Checkbox } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
-
+import VoteOptionSection from '../VoteOptionSection/VoteOptionSection'
 import "react-datepicker/dist/react-datepicker.css";
 import "./AddNewVoteModal.css"
 import he from 'date-fns/locale/he';
@@ -13,11 +13,13 @@ export default function AddNewVoteModal({ show, onClose }) {
     const [details, setDetails] = useState();
     const [dueDate, setDueDate] = useState();
     const [isPermitMultiVotes, setIsPermitMultiVotes] = useState(false);
+    const [voteOptions, setVoteOptions] = useState([]);
 
     useEffect(() => {
         //clearForm();
         registerLocale('he', he);
 
+            console.log(voteOptions)
     }, []);
 
 
@@ -52,7 +54,7 @@ export default function AddNewVoteModal({ show, onClose }) {
                                 value={details} onChange={e => setDetails(e.target.value)} />
                         </Col>
                     </Form.Group>
-                    
+                    <VoteOptionSection onChange={(options)=>console.log(options)}></VoteOptionSection>
                     <Form.Group as={Row} controlId="formHorizontalDueDate">
                         <Form.Label column sm={3}>
                             תאריך סיום הצבעה
