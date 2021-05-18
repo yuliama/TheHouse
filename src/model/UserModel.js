@@ -52,7 +52,7 @@ export default class UserModel {
 
         newUser.setACL(acl);
 
-        await newUser.save({ useMasterKey: true });
+        await newUser.save();
     }
     static async updateUser(userId, email, fullName, apartment){
         const query = new Parse.Query(Parse.User);

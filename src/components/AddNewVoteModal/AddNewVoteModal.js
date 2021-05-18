@@ -1,14 +1,32 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Button, Modal, Form, Col, Row, Checkbox } from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 
-export default function AddNewVoteModal({ show, onClose }){
+import "react-datepicker/dist/react-datepicker.css";
+import "./AddNewVoteModal.css"
+import he from 'date-fns/locale/he';
+
+
+export default function AddNewVoteModal({ show, onClose }) {
     const [title, setTitle] = useState();
-    const[details, setDetails] = useState();
+    const [details, setDetails] = useState();
     const [dueDate, setDueDate] = useState();
-    const[isPermitMultiVotes, setIsPermitMultiVotes] = useState();
+    const [isPermitMultiVotes, setIsPermitMultiVotes] = useState(false);
 
-return(
-    <Modal show={show} onHide={onClose} size="lg" className="c-new-user">
-            <Modal.Header closeButton>
+    useEffect(() => {
+        //clearForm();
+        registerLocale('he', he);
+
+    }, []);
+
+
+    async function createOrUpdateVote() {
+
+    }
+    return (
+        <Modal show={show} onHide={onClose} size="lg" className="c-new-user">
+            <Modal.Header closeButton className="d-flex justify-content-between align-items-center">
                 <Modal.Title>הוספת הצבעה חדשה</Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -23,6 +41,8 @@ return(
                         </Col>
                     </Form.Group>
 
+
+
                     <Form.Group as={Row} controlId="formHorizontalDetails">
                         <Form.Label column sm={3}>
                             פרטי הצבעה
@@ -32,15 +52,24 @@ return(
                                 value={details} onChange={e => setDetails(e.target.value)} />
                         </Col>
                     </Form.Group>
-                    {/* <Form.Group as={Row} controlId="formHorizontalApartment">
+                    
+                    <Form.Group as={Row} controlId="formHorizontalDueDate">
                         <Form.Label column sm={3}>
-                            מספר דירה
+                            תאריך סיום הצבעה
                         </Form.Label>
-                        <Col sm={9}>
-                            <Form.Control type="text" placeholder="מספר דירה"
-                                value={apartment} onChange={e => setApartment(e.target.value)} />
+                        <Col sm={3}>
+                            <DatePicker selected={dueDate} onChange={(date) => setDueDate(date)} inline locale="he" />
                         </Col>
-                    </Form.Group> */}
+                    </Form.Group>
+                    <Form.Group as={Row} className="align-items-center" controlId="formHorizontalIsPermitMultiVotes">
+                        <Col sm={3}>
+                            <Form.Check type="checkbox" checked={isPermitMultiVotes} onChange={() => setIsPermitMultiVotes(!isPermitMultiVotes)} />
+                        </Col>
+                        <Form.Label column sm={9}>
+                            לאפשר בחירת אופציות מרובות?
+                        </Form.Label>
+
+                    </Form.Group>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -52,5 +81,5 @@ return(
                 </Button>
             </Modal.Footer>
         </Modal>
-)
+    )
 }

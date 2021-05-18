@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, Form, Col, Row, Image } from 'react-bootstrap';
+import { Button, Modal, Form, Col, Row } from 'react-bootstrap';
 import UserModel from '../../model/UserModel';
 
 export default function AddNewUserModal({ user, show, onClose }) {
