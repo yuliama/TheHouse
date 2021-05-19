@@ -1,0 +1,13 @@
+.c-message-modal .form-label{
+    text-align: right;
+}
+.c-message-modal .modal-header button{
+    margin:0;
+}
+.c-message-modal .modal-content{
+    background-color: lightgray;
+    width: 500px;
+    top: 200px;
+    right:100px;
+    text-align: right;
+}

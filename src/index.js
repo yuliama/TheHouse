@@ -14,8 +14,8 @@ import Parse from 'parse'
 
 Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
 Parse.initialize(
-  '9lTF0rGZYzJ1drIFVFhcNCSdIpAliXM0hr9JBdka', // This is your Application ID
-  'wNBrUo17cHw3b8zwUa3SUJmd4aaOuB3hvh1PPMVm' // This is your Javascript key
+  'WSAgtDtYTeSzlJpoNAUqKC2Ef4BSJzjd2zorUDsU', // This is your Application ID
+  'fIPrvKvrc9mLkSas68q8KLsFjyqHxux9LHl2iv6w' // This is your Javascript key
 );
 
 ReactDOM.render(
