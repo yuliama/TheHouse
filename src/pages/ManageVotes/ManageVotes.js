@@ -8,12 +8,10 @@ import './ManageVotes.css';
 export default function ManageVotes({ activeUser }) {
     const [showNewVoteModal, setShowNewVoteModal] = useState(false);
     const [communityVotes, setCommunityVotes] = useState([]);
-// console.log(communityVotes);
     useEffect(() => {
         async function fetchData() {
             setCommunityVotes(await VoteModel.getCommunityVotes(activeUser.Community.id));
         }
-
         if (activeUser) {
             fetchData();
         }
