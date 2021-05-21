@@ -2,7 +2,7 @@ import Parse from 'parse';
 
 export default class VoteModel {
     constructor(parseVote) {
-        this.id = parseVote.get("id");
+        this.id = parseVote.id;
         this.title = parseVote.get("title");
         this.details = parseVote.get("details");
         this.dueDate = parseVote.get("dueDate");
@@ -31,6 +31,16 @@ export default class VoteModel {
         newVote.setACL(acl);
 
         return await newVote.save();
+    }
+    static async saveDate(voteId, dueDate){
+        console.log(voteId, dueDate)
+        const voteTable = Parse.Object.extend('Vote');
+        const query = new Parse.Query(voteTable);
+        query.contains("objectId", voteId);
+        const vote = await query.find({ id: voteId });
+        console.log(vote);
+
+        await vote[0].save({ 'dueDate': dueDate });
     }
 
     static async getCommunityVotes(communityId){

@@ -1,6 +1,6 @@
 .c-vote-card{
     margin-top:20px;
-    width:300px;
+    width:340px;
     background-color: floralwhite;
     opacity: 0.8;
     color:black;
@@ -14,4 +14,9 @@
     margin-top:5px;
     font-size:13px;
     width:100%;
+}
+.c-vote-card .actions{
+    margin-top:30px;
+    display: flex;
+    justify-content: space-between;
 }
