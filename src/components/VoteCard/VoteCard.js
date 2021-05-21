@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import UserVoteModel from "../../model/UserVoteModel";
 import VoteOptionModel from "../../model/VoteOptionModel";
 import { Pie } from 'react-chartjs-2';
+import './VoteCard.css';
 
 export default function VoteCard({ vote }) {
     const voteSumData = useMemo(() => {
@@ -14,22 +15,36 @@ export default function VoteCard({ vote }) {
             sumOptionVotes.push(userVotes.filter(item => item===option.id).length);
         }
 
-        console.log( options.map(option => option.text), sumOptionVotes)
         return {
             labels: options.map(option => option.text),
             datasets: [
                 {
                     label: '',
                     data: sumOptionVotes,
+                    backgroundColor: [
+                        '#CA70A8',
+                        '#2381CF',
+                        '#E9C66E',
+                        '#0B0E3E',
+                        '#F6EE1D'
+                      ],
+                      borderColor: [
+                        '#CA70A8',
+                        '#2381CF',
+                        '#E9C66E',
+                        '#0B0E3E',
+                        '#F6EE1D'
+                      ],
+                      borderWidth: 1,
                 }
             ],
         };
     }, [vote]);
     return (
-        <div>
-            {vote.title}
-            {vote.details}
-            <Pie data={voteSumData}/>
+        <div className="c-vote-card">
+            <div className="title">{vote.title}</div>
+            <div className="details">{vote.details}</div>
+            {vote.userVotes?<Pie data={voteSumData}/>:<div  className="details">עדיין לא התקבלו הצבעות</div>}
         </div>
     )
 }

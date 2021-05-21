@@ -1,0 +1,17 @@
+.c-vote-card{
+    margin-top:20px;
+    width:300px;
+    background-color: floralwhite;
+    opacity: 0.8;
+    color:black;
+    padding:20px;
+    border-radius: 10px;
+}
+.c-vote-card .title{
+    
+}
+.c-vote-card .details{
+    margin-top:5px;
+    font-size:13px;
+    width:100%;
+}

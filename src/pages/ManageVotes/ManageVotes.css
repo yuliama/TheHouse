@@ -1,3 +1,9 @@
 .p-manageVotes{
     text-align: right;
 }
+.p-manageVotes .prev-votes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

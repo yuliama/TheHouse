@@ -19,13 +19,22 @@ export default function ManageVotes({ activeUser }) {
     return (
         <div className="p-manageVotes">
             <Button onClick={() => setShowNewVoteModal(true)}>+הוסף הצבעה</Button>
-            <AddNewVoteModal show={showNewVoteModal} onClose={() => setShowNewVoteModal(false)}></AddNewVoteModal>
+            <AddNewVoteModal show={showNewVoteModal} onClose={() => setShowNewVoteModal(false)} activeUser={activeUser}></AddNewVoteModal>
             {communityVotes.length ?
-                <div>הצבעות קודמות
-                    {communityVotes.map((vote) => <VoteCard vote={vote}></VoteCard>)}
+                <div>
+                    <h1>הצבעות קודמות</h1>
+                    <div className="prev-votes">
+                        {communityVotes.slice(0, 6).map((vote) => <VoteCard vote={vote}></VoteCard>)}
+                    </div>
+                    {communityVotes.length > 6 ?
+                        <div className="more-votes-link">
+                            <a href="">להצבעות נוספות</a>
+                        </div>
+                        : ''}
                 </div>
                 :
-                <div>אין הצבעות קודמות</div>}
+                <div>אין הצבעות קודמות</div>
+            }
         </div>
     )
 }

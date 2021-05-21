@@ -13,7 +13,7 @@ export default class VoteModel {
         this.isDeleted = parseVote.get("isDeleted");
     }
 
-    static async addNewVote(title, details, dueDate, isPermitMultiVotes, voteOptions) {
+    static async addNewVote(title, details, dueDate, isPermitMultiVotes, voteOptions, communityId) {
         const VoteTable = Parse.Object.extend('Vote');
         const newVote = new VoteTable();
         newVote.set('title', title);
@@ -22,7 +22,7 @@ export default class VoteModel {
         newVote.set('isPermitMultiVotes', isPermitMultiVotes);
         newVote.set('voteOptions', voteOptions);
         newVote.set('isDeleted', false);
-        newVote.set('CommunityId', this.activeUser.Community);
+        newVote.set('CommunityId', communityId);
 
         var acl = new Parse.ACL();
         acl.setPublicWriteAccess(true);

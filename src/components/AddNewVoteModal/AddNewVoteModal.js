@@ -10,7 +10,7 @@ import VoteModel from "../../model/VoteModel";
 import MessageModal from '../MessageModal/MessageModal'
 
 
-export default function AddNewVoteModal({ show, onClose }) {
+export default function AddNewVoteModal({ show, onClose, activeUser }) {
     const [title, setTitle] = useState();
     const [details, setDetails] = useState();
     const [dueDate, setDueDate] = useState();
@@ -39,7 +39,7 @@ export default function AddNewVoteModal({ show, onClose }) {
 
     async function createOrUpdateVote() {
         if (title && details && voteOptions) {
-            const result = await VoteModel.addNewVote(title, details, dueDate, isPermitMultiVotes, voteOptions);
+            const result = await VoteModel.addNewVote(title, details, dueDate, isPermitMultiVotes, voteOptions, activeUser.Community);
             setShowMessageModal(true);
             if (result) {
                 setMessageTxt("ההצבעה נשמרה");
