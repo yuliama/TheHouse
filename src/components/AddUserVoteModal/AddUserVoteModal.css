@@ -1,0 +1,22 @@
+.c-new-useVote{
+    text-align: right;
+}
+.c-new-useVote .vote-details{
+    font-size:17px;
+    margin-bottom: 10px;
+}
+.c-new-useVote .vote-options{
+    display: flex;
+}
+.c-new-useVote .vote-options> .vote-option{
+    color:white;
+    margin-left:15px;
+    margin-top: 5px;
+    background-color: #ff5933;
+    padding: 3px 8px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+.c-new-useVote .vote-options> .vote-option.chosen{
+    opacity: 0.8;
+}

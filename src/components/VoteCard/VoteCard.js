@@ -2,12 +2,14 @@ import { useMemo, useState } from "react";
 import DateModal from "../../components/DateModal/DateModal";
 import VoteOptionModel from "../../model/VoteOptionModel";
 import VoteModel from "../../model/VoteModel";
+import AddUserVoteModal from "../AddUserVoteModal/AddUserVoteModal"
 import { Pie } from 'react-chartjs-2';
 import './VoteCard.css';
 import { Button } from "react-bootstrap";
 
 export default function VoteCard({ vote, activeUser }) {
     const [showDateModal, setShowDateModal] = useState(false);
+    const [showAddUserVoteModal, setShowAddUserVoteModal] = useState(false);
 
     const voteSumData = useMemo(() => {
         if (!vote.userVotes) return null;
@@ -77,7 +79,8 @@ export default function VoteCard({ vote, activeUser }) {
             {
                 vote.dueDate > new Date() ?
                     <div className="actions">
-                        <Button onClick={() => setShowDateModal(true)}>להצביע</Button>
+                        <Button onClick={() => setShowAddUserVoteModal(true)}>להצביע</Button>
+                        <AddUserVoteModal show={showAddUserVoteModal} onClose={()=> setShowAddUserVoteModal(false)} vote={vote} activeUser={activeUser}></AddUserVoteModal>
                     </div>
                     : ''
             }

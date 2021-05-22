@@ -58,7 +58,7 @@ export default class UserModel {
         const query = new Parse.Query(Parse.User);
         query.contains("objectId", userId);
         const user = await query.find({ id: userId });
-        console.log(user);
+        //console.log(user);
 
         await user[0].save({ 'username': email, 'email': email, 'fullName': fullName, 'apartment': apartment });
     }
@@ -67,7 +67,7 @@ export default class UserModel {
         const query = new Parse.Query(Parse.User);
         query.contains("objectId", userId);
         const user = await query.find({ id: userId });
-        console.log(user);
+        //console.log(user);
         await user[0].save({ IsDeleted: true });
     }
 

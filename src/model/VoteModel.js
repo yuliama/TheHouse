@@ -32,18 +32,33 @@ export default class VoteModel {
 
         return await newVote.save();
     }
-    static async saveDate(voteId, dueDate){
-        console.log(voteId, dueDate)
+
+    static async addUserVote(voteId, results) {
+        const voteTable = Parse.Object.extend('Vote');
+        const query = new Parse.Query(voteTable);
+        query.contains("objectId", voteId);
+
+        const vote = await query.find();
+
+        let voteItem = new VoteModel(vote[0]).userVotes;
+        if (!voteItem) {
+            voteItem = [];
+        }
+        voteItem.push(results);
+
+        await vote[0].save({'userVotes': voteItem});
+    }
+
+    static async saveDate(voteId, dueDate) {
         const voteTable = Parse.Object.extend('Vote');
         const query = new Parse.Query(voteTable);
         query.contains("objectId", voteId);
         const vote = await query.find({ id: voteId });
-        console.log(vote);
 
         await vote[0].save({ 'dueDate': dueDate });
     }
 
-    static async getCommunityVotes(communityId){
+    static async getCommunityVotes(communityId) {
         const voteTable = Parse.Object.extend('Vote');
         const query = new Parse.Query(voteTable);
         query.contains("CommunityId", communityId);
