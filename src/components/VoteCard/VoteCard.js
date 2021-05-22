@@ -10,9 +10,14 @@ import { Button } from "react-bootstrap";
 export default function VoteCard({ vote, activeUser }) {
     const [showDateModal, setShowDateModal] = useState(false);
     const [showAddUserVoteModal, setShowAddUserVoteModal] = useState(false);
+    const [isUserVoted, setIsUserVoted] = useState(true);
 
     const voteSumData = useMemo(() => {
-        if (!vote.userVotes) return null;
+        if (!vote.userVotes) {
+            setIsUserVoted(false);
+            return null;
+        }
+
         const options = vote.voteOptions.map(option => new VoteOptionModel(option.id, option.text));
         const userVotes = vote.userVotes.map(userVote => userVote.value).flat(1);
 
@@ -21,6 +26,9 @@ export default function VoteCard({ vote, activeUser }) {
             const optionVoteCount = userVotes.filter(item => item === option.id).length;
             sumOptionVotes.push(optionVoteCount);
         }
+
+        const userVote = vote.userVotes.filter(item => item.id == activeUser.id).length;
+        setIsUserVoted(userVote);
 
         return {
             labels: options.map(option => option.text),
@@ -77,10 +85,10 @@ export default function VoteCard({ vote, activeUser }) {
                     : ''
             }
             {
-                vote.dueDate > new Date() ?
+                vote.dueDate > new Date() && !isUserVoted ?
                     <div className="actions">
                         <Button onClick={() => setShowAddUserVoteModal(true)}>להצביע</Button>
-                        <AddUserVoteModal show={showAddUserVoteModal} onClose={()=> setShowAddUserVoteModal(false)} vote={vote} activeUser={activeUser}></AddUserVoteModal>
+                        <AddUserVoteModal show={showAddUserVoteModal} onClose={() => setShowAddUserVoteModal(false)} vote={vote} activeUser={activeUser}></AddUserVoteModal>
                     </div>
                     : ''
             }
