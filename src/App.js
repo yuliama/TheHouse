@@ -48,7 +48,7 @@ function App() {
         </Switch>
       </HashRouter>
 
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 }

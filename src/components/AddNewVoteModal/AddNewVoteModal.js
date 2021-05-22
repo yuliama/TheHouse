@@ -14,7 +14,7 @@ export default function AddNewVoteModal({ show, onClose, activeUser }) {
     const [title, setTitle] = useState();
     const [details, setDetails] = useState();
     const [dueDate, setDueDate] = useState();
-    const [isPermitMultiVotes, setIsPermitMultiVotes] = useState(false);
+    const [isPermitMultiVotes, setIsPermitMultiVotes] = useState(true);
     const [voteOptions, setVoteOptions] = useState([]);
     const [showMessageModal, setShowMessageModal] = useState(false);
     const [messageTxt, setMessageTxt] = useState("ארעה שגיאה");
@@ -90,14 +90,14 @@ export default function AddNewVoteModal({ show, onClose, activeUser }) {
                             <DatePicker selected={dueDate} onChange={(date) => setDueDate(date)} inline locale="he" />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} className="align-items-center" controlId="formHorizontalIsPermitMultiVotes">
+                    {/* <Form.Group as={Row} className="align-items-center" controlId="formHorizontalIsPermitMultiVotes">
                         <Col sm={3}>
                             <Form.Check type="checkbox" checked={isPermitMultiVotes} onChange={() => setIsPermitMultiVotes(!isPermitMultiVotes)} />
                         </Col>
                         <Form.Label column sm={9}>
                             לאפשר בחירת אופציות מרובות?
                         </Form.Label>
-                    </Form.Group>
+                    </Form.Group> */}
                 </Form>
             </Modal.Body>
             <Modal.Footer>

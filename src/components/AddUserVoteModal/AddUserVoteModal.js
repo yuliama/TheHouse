@@ -10,6 +10,7 @@ export default function AddUserVoteModal({ show, onClose, vote, activeUser }) {
     async function createUserVote() {
         const userVote = new UserVoteModel(activeUser.id, chosenItem.map(item => item.id));
         await VoteModel.addUserVote(vote.id, userVote);
+        onClose();
     }
 
     function createOptionsObject(obj) {
