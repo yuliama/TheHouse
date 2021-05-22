@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Form, Col, Row } from 'react-bootstrap';
 import UserModel from '../../model/UserModel';
+import './AddNewUserModal.css';
 
 export default function AddNewUserModal({ user, show, onClose }) {
     const [fullName, setFullName] = useState();
@@ -32,7 +33,7 @@ export default function AddNewUserModal({ user, show, onClose }) {
 
     return (
         <Modal show={show} onHide={onClose} size="lg" className="c-new-user">
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className="d-flex justify-content-between align-items-center">
                 {user ? <Modal.Title>עדכון משתמש</Modal.Title> : <Modal.Title>הוספת משתמש חדש</Modal.Title>}
             </Modal.Header>
             <Modal.Body>
