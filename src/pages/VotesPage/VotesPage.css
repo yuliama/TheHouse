@@ -7,3 +7,9 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.p-votes .closed-vote, .p-votes .no-votes{
+    color:#ff5933;
+    font-weight: bold;
+    font-size:14px;
+    padding-bottom: 10px;
+}

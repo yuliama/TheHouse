@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 
 export default function VoteCard({ vote, activeUser }) {
     const [showDateModal, setShowDateModal] = useState(false);
+
     const voteSumData = useMemo(() => {
         if (!vote.userVotes) return null;
         const options = vote.voteOptions.map(option => new VoteOptionModel(option.id, option.text));
@@ -15,7 +16,8 @@ export default function VoteCard({ vote, activeUser }) {
 
         const sumOptionVotes = [];
         for (const option of options) {
-            sumOptionVotes.push(userVotes.filter(item => item === option.id).length);
+            const optionVoteCount = userVotes.filter(item => item === option.id).length;
+            sumOptionVotes.push(optionVoteCount);
         }
 
         return {
@@ -57,13 +59,16 @@ export default function VoteCard({ vote, activeUser }) {
 
     return (
         <div className="c-vote-card">
+            {vote.dueDate < new Date() ?
+                <div className="closed-vote">ההצבעה סגורה!</div> : ''
+            }
             <div className="title">{vote.title}</div>
             <div className="details">{vote.details}</div>
-            {vote.userVotes ? <Pie data={voteSumData} /> : <div className="details">עדיין לא התקבלו הצבעות</div>}
+            {vote.userVotes ? <Pie data={voteSumData} /> : <div className="details no-votes">עדיין לא התקבלו הצבעות</div>}
             {
                 vote.dueDate > new Date() && activeUser.isCommiteeMember ?
                     <div className="actions">
-                        <Button onClick={() => setShowDateModal(true)}>הערכת ההצבעה</Button>
+                        <Button onClick={() => setShowDateModal(true)}>הארכת ההצבעה</Button>
                         <Button onClick={() => closeVote()}>סגירת ההצבעה</Button>
                         <DateModal show={showDateModal} onClose={(date) => saveDate(date)} titleTxt="עדכון תאריך הצבעה"></DateModal>
                     </div>
