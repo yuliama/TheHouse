@@ -10,9 +10,9 @@ export default function Header({ activeUser, onLogout }) {
         <div className="header">
             <div className="mainMenu">
                 <a href="/"><img alt="Home" src={homeImg} onMouseEnter={() => setHomeImg(hoverImg)} onMouseLeave={() => setHomeImg(img)} className="logo"></img></a>
-                <Button variant='link'>על החברה</Button>
-                <Button variant='link'>על המוצר</Button>
-                <Button variant='link'>תמיכה</Button>
+                <a href="#/company" >על החברה</a>
+                <a href="#/product">על המוצר</a>
+                <a href="#/support">תמיכה</a>
             </div>
             <div className="loginMenu">
                 {!activeUser ? <a href="#/login" variant='link'>כניסה</a>:

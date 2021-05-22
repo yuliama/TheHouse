@@ -10,7 +10,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DashBoardPage from './pages/DashBoardPage/DashBoardPage';
 import ActionsHeader from './components/ActionsHeader/ActionsHeader';
 import ManageUsers from './pages/ManageUsers/ManageUsers';
-import ManageVotes from './pages/ManageVotes/ManageVotes';
+import VotesPage from './pages/VotesPage/VotesPage';
+import IssuePage from './pages/IssuePage/IssuePage';
+import MessagePage from './pages/MessagePage/MessagePage';
+import CompanyPage from './pages/CompanyPage/CompanyPage';
+import ProductPage from './pages/ProductPage/ProductPage';
+import SupportPage from './pages/SupportPage/SupportPage'; 
+
 function App() {
   const [activeUser, setActiveUser] = useState(UserModel.loadActiveUser());
 
@@ -32,7 +38,12 @@ function App() {
             <Route exact path="/login"><LoginPage activeUser={activeUser} onLogin={user => setActiveUser(user)} /></Route>
             <Route exact path="/dashBoard"><DashBoardPage activeUser={activeUser}></DashBoardPage></Route>
             <Route exact path="/manageUsers"><ManageUsers activeUser={activeUser}></ManageUsers></Route>
-            <Route exact path="/manageVotes"><ManageVotes activeUser={activeUser}></ManageVotes></Route>
+            <Route exact path="/votes"><VotesPage activeUser={activeUser}></VotesPage></Route>
+            <Route exact path="/issue"><IssuePage activeUser={activeUser}></IssuePage></Route>
+            <Route exact path="/message"><MessagePage activeUser={activeUser}></MessagePage></Route>
+            <Route exact path="/company"><CompanyPage activeUser={activeUser}></CompanyPage></Route>
+            <Route exact path="/product"><ProductPage activeUser={activeUser}></ProductPage></Route>
+            <Route exact path="/support"><SupportPage activeUser={activeUser}></SupportPage></Route>
           </div>
         </Switch>
       </HashRouter>

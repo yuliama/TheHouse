@@ -36,7 +36,9 @@ export default function AddNewVoteModal({ show, onClose, activeUser }) {
         clearForm();
         onClose();
     }
-
+    if (!activeUser.isCommiteeMember) {
+        onClose();
+    }
     async function createOrUpdateVote() {
         if (title && details && voteOptions) {
             const result = await VoteModel.addNewVote(title, details, dueDate, isPermitMultiVotes, voteOptions, activeUser.Community);

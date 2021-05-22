@@ -6,7 +6,7 @@ import { Pie } from 'react-chartjs-2';
 import './VoteCard.css';
 import { Button } from "react-bootstrap";
 
-export default function VoteCard({ vote }) {
+export default function VoteCard({ vote, activeUser }) {
     const [showDateModal, setShowDateModal] = useState(false);
     const voteSumData = useMemo(() => {
         if (!vote.userVotes) return null;
@@ -44,12 +44,12 @@ export default function VoteCard({ vote }) {
         };
     }, [vote]);
 
-    async function saveDate(date){
+    async function saveDate(date) {
         setShowDateModal(false);
         await VoteModel.saveDate(vote.id, date);
     }
 
-    async function closeVote(){
+    async function closeVote() {
         const now = new Date();
         await VoteModel.saveDate(vote.id, now);
         //send email
@@ -60,14 +60,23 @@ export default function VoteCard({ vote }) {
             <div className="title">{vote.title}</div>
             <div className="details">{vote.details}</div>
             {vote.userVotes ? <Pie data={voteSumData} /> : <div className="details">עדיין לא התקבלו הצבעות</div>}
-            {vote.dueDate > new Date() ?
-                <div className="actions">
-                    <Button onClick={() => setShowDateModal(true)}>הערכת ההצבעה</Button>
-                    <Button onClick={() => closeVote()}>סגירת ההצבעה</Button>
-                    <DateModal show={showDateModal} onClose={(date) => saveDate(date)} titleTxt="עדכון תאריך הצבעה"></DateModal>
-                </div>
-                : ''
+            {
+                vote.dueDate > new Date() && activeUser.isCommiteeMember ?
+                    <div className="actions">
+                        <Button onClick={() => setShowDateModal(true)}>הערכת ההצבעה</Button>
+                        <Button onClick={() => closeVote()}>סגירת ההצבעה</Button>
+                        <DateModal show={showDateModal} onClose={(date) => saveDate(date)} titleTxt="עדכון תאריך הצבעה"></DateModal>
+                    </div>
+                    : ''
             }
+            {
+                vote.dueDate > new Date() ?
+                    <div className="actions">
+                        <Button onClick={() => setShowDateModal(true)}>להצביע</Button>
+                    </div>
+                    : ''
+            }
+
         </div>
     )
 }

@@ -2,7 +2,10 @@
     display: flex;
     padding:0 50px;
     justify-content: space-between;
-
+}
+.actions-header, .actions-header .manageMenu, .actions-header .userMenu{
+    display: flex;
+    justify-content: space-between;
 }
 .actions-header button, .actions-header a, .greetings-menu{
     color:white;
@@ -10,7 +13,9 @@
     font-family: 'Assistant', sans-serif;
     font-size: 17px;
     font-weight: bold;
-
+}
+.actions-header a{
+    margin: 0 10px;
 }
 .actions-header button:hover, .actions-header a:hover{
     color:#ff5933;

@@ -9,17 +9,13 @@ export default function ActionsHeader({ activeUser }) {
     }
     return (
         <div className="actions-header">
-            <div className="mainMenu">
-                {activeUser.isCommiteeMember ?
+            <div className="mainMenu">             
                     <div className="manageMenu">
-                        <a href="#/manageUsers">ניהול דיירים</a>
-                        <Button variant='link'>ניהול ליקויים</Button>
-                        <Button variant='link'>ניהול הודעות</Button>
-                        <a href="#/ManageVotes">ניהול הצבעות</a>
+                    {activeUser.isCommiteeMember ?<a href="#/manageUsers">ניהול דיירים</a>:''}
+                        <a href="#/issue">ליקויים</a>
+                        <a href="#/message">הודעות</a>
+                        <a href="#/votes">הצבעות</a>
                     </div>
-                    : ''}
-                <Button variant='link'>דיווח על ליקוי</Button>
-                <Button variant='link'>הצבעות</Button>
             </div>
             <div className="greetings-menu">
                 שלום, {activeUser.fullName}{' '}
