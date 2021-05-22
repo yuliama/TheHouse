@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/TheHouse/static/css/main.e21fdc42.chunk.css",
+    "main.js": "/TheHouse/static/js/main.e4d7364d.chunk.js",
+    "main.js.map": "/TheHouse/static/js/main.e4d7364d.chunk.js.map",
+    "runtime-main.js": "/TheHouse/static/js/runtime-main.dfb6a636.js",
+    "runtime-main.js.map": "/TheHouse/static/js/runtime-main.dfb6a636.js.map",
+    "static/css/2.01ca705e.chunk.css": "/TheHouse/static/css/2.01ca705e.chunk.css",
+    "static/js/2.83385769.chunk.js": "/TheHouse/static/js/2.83385769.chunk.js",
+    "static/js/2.83385769.chunk.js.map": "/TheHouse/static/js/2.83385769.chunk.js.map",
+    "static/js/3.d8c4ff30.chunk.js": "/TheHouse/static/js/3.d8c4ff30.chunk.js",
+    "static/js/3.d8c4ff30.chunk.js.map": "/TheHouse/static/js/3.d8c4ff30.chunk.js.map",
+    "index.html": "/TheHouse/index.html",
+    "static/css/2.01ca705e.chunk.css.map": "/TheHouse/static/css/2.01ca705e.chunk.css.map",
+    "static/css/main.e21fdc42.chunk.css.map": "/TheHouse/static/css/main.e21fdc42.chunk.css.map",
+    "static/js/2.83385769.chunk.js.LICENSE.txt": "/TheHouse/static/js/2.83385769.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dfb6a636.js",
+    "static/css/2.01ca705e.chunk.css",
+    "static/js/2.83385769.chunk.js",
+    "static/css/main.e21fdc42.chunk.css",
+    "static/js/main.e4d7364d.chunk.js"
+  ]
+}
