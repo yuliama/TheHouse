@@ -9,7 +9,7 @@ export default function Header({ activeUser, onLogout }) {
     return (
         <div className="header">
             <div className="mainMenu">
-                <a href="/"><img alt="Home" src={homeImg} onMouseEnter={() => setHomeImg(hoverImg)} onMouseLeave={() => setHomeImg(img)} className="logo"></img></a>
+                <a href="#/"><img alt="Home" src={homeImg} onMouseEnter={() => setHomeImg(hoverImg)} onMouseLeave={() => setHomeImg(img)} className="logo"></img></a>
                 <a href="#/company" >על החברה</a>
                 <a href="#/product">על המוצר</a>
                 <a href="#/support">תמיכה</a>
