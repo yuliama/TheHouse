@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import { Redirect } from 'react-router';
 import './ActionsHeader.css';
 

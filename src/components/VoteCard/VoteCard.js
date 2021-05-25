@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import DateModal from "../../components/DateModal/DateModal";
 import VoteOptionModel from "../../model/VoteOptionModel";
 import VoteModel from "../../model/VoteModel";
@@ -10,11 +10,13 @@ import { Button } from "react-bootstrap";
 export default function VoteCard({ vote, activeUser }) {
     const [showDateModal, setShowDateModal] = useState(false);
     const [showAddUserVoteModal, setShowAddUserVoteModal] = useState(false);
-    const [isUserVoted, setIsUserVoted] = useState(true);
-
+    const [showVoteButton, setShowVoteButton] = useState(true);
+    const [showManageVoteButtons, setShowManageVoteButtons] = useState(true);
+    const [showVoteIsClosedMessage, setShowVoteIsClosedMessage] = useState(false);
+    
     const voteSumData = useMemo(() => {
         if (!vote.userVotes) {
-            setIsUserVoted(false);
+            setShowVoteButton(true);
             return null;
         }
 
@@ -27,8 +29,11 @@ export default function VoteCard({ vote, activeUser }) {
             sumOptionVotes.push(optionVoteCount);
         }
 
+        
         const userVote = vote.userVotes.filter(item => item.id == activeUser.id).length;
-        setIsUserVoted(userVote);
+        if(userVote){
+            setShowVoteButton(false);
+        }
 
         return {
             labels: options.map(option => option.text),
@@ -54,29 +59,50 @@ export default function VoteCard({ vote, activeUser }) {
                 }
             ],
         };
+    }, [vote, showAddUserVoteModal]);
+
+    useEffect(() => {
+        if(activeUser.isCommiteeMember){
+            setShowManageVoteButtons(true);
+        }
     }, [vote]);
 
     async function saveDate(date) {
         setShowDateModal(false);
         await VoteModel.saveDate(vote.id, date);
+        if(date < new Date()){
+            setShowManageVoteButtons(false);
+            setShowVoteButton(false);
+            setShowVoteIsClosedMessage(true);
+        //send email
+        }
     }
 
     async function closeVote() {
         const now = new Date();
         await VoteModel.saveDate(vote.id, now);
+        setShowManageVoteButtons(false);
+        setShowVoteButton(false);
+        setShowVoteIsClosedMessage(true);
         //send email
+    }
+    function closeAddNewVoteModal(isSaved){
+        setShowAddUserVoteModal(false);
+        if(isSaved){
+            setShowVoteButton(false);
+        }
     }
 
     return (
         <div className="c-vote-card">
-            {vote.dueDate < new Date() ?
+            {showVoteIsClosedMessage?
                 <div className="closed-vote">ההצבעה סגורה!</div> : ''
             }
             <div className="title">{vote.title}</div>
             <div className="details">{vote.details}</div>
             {vote.userVotes ? <Pie data={voteSumData} /> : <div className="details no-votes">עדיין לא התקבלו הצבעות</div>}
             {
-                vote.dueDate > new Date() && activeUser.isCommiteeMember ?
+                vote.dueDate > new Date() && activeUser.isCommiteeMember && showManageVoteButtons ?
                     <div className="actions">
                         <Button onClick={() => setShowDateModal(true)}>הארכת ההצבעה</Button>
                         <Button onClick={() => closeVote()}>סגירת ההצבעה</Button>
@@ -85,10 +111,10 @@ export default function VoteCard({ vote, activeUser }) {
                     : ''
             }
             {
-                vote.dueDate > new Date() && !isUserVoted ?
+                vote.dueDate > new Date() && showVoteButton ?
                     <div className="actions">
                         <Button onClick={() => setShowAddUserVoteModal(true)}>להצביע</Button>
-                        <AddUserVoteModal show={showAddUserVoteModal} onClose={() => setShowAddUserVoteModal(false)} vote={vote} activeUser={activeUser}></AddUserVoteModal>
+                        <AddUserVoteModal show={showAddUserVoteModal} onClose={(isSaved) => closeAddNewVoteModal(isSaved)} vote={vote} activeUser={activeUser}></AddUserVoteModal>
                     </div>
                     : ''
             }

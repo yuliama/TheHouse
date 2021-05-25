@@ -6,12 +6,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./DateModal.css"
 import he from 'date-fns/locale/he';
 import MessageModal from '../MessageModal/MessageModal'
-import VoteModel from "../../model/VoteModel";
 
 export default function DateModal({titleTxt, show, onClose}) {
     const [dueDate, setDueDate] = useState();
     const [showMessageModal, setShowMessageModal] = useState(false);
-    const [messageTxt, setMessageTxt] = useState("ארעה שגיאה");
+    //const [messageTxt, setMessageTxt] = useState("ארעה שגיאה");
 
     useEffect(() => {
         setShowMessageModal(false);
@@ -41,7 +40,7 @@ export default function DateModal({titleTxt, show, onClose}) {
                     שמירה
                 </Button>
             </Modal.Footer>
-            <MessageModal messageTxt={messageTxt} show={showMessageModal} onClose={() => setShowMessageModal(false)}></MessageModal>
+            {/* <MessageModal messageTxt={messageTxt} show={showMessageModal} onClose={() => setShowMessageModal(false)}></MessageModal> */}
             </Modal>
             )
 }

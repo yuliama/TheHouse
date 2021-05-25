@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Button, Modal, Form, Col, Row, Alert } from "react-bootstrap";
+import { Button, Modal, Form, Col, Row } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import VoteOptionSection from '../VoteOptionSection/VoteOptionSection'

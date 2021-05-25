@@ -16,7 +16,7 @@ export default function VotesPage({ activeUser }) {
         if (activeUser) {
             fetchData();
         }
-    }, []);
+    }, [showNewVoteModal]);
     if (!activeUser) {
         return <Redirect to="/" />
     }
